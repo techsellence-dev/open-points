@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import CheckCurrentUser from './CheckCurrentUser';
+
+let CurrentAuthenticatedUser = "";
+let counter = 0;
+let currentState;
+
+const checkLoginState = async () => {
+  counter += 1;
+  console.log('before the await function : '+ counter);
+  CurrentAuthenticatedUser = await CheckCurrentUser();
+  console.log("current authed user " + CurrentAuthenticatedUser);
+  console.log('after the await function : '+ counter);
+  if (CurrentAuthenticatedUser === true) {
+    // setLoginState(CurrentAuthenticatedUser);
+    console.log(
+      "loginstate has been set to value: " + CurrentAuthenticatedUser
+    );
+  }
+};
 
 function App() {
+  console.log("executing before");
+  currentState = checkLoginState();
+  console.log("executing after");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<h1>Open Points</h1>
   );
 }
 
