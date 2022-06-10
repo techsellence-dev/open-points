@@ -1,4 +1,4 @@
-function CheckCurrentUser() {
+async function CheckCurrentUser() {
   try {
     console.log("inside check current user document try block");
     fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>

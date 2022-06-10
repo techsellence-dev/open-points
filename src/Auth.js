@@ -1,19 +1,30 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import CheckCurrentUser from "./CheckCurrentUser";
 
-let currentState;
+let counter = 0;
 
 function Auth() {
-  const CurrentAuthenticatedUser = useRef(undefined);
-  const loading = useRef(false);
+const currentUser = useRef(false)
+let navigate = useNavigate();
+
+useEffect(()=>{
+  navigate("/Home", {replace : true})
+  console.log('inside use effect')
+    },
+  [currentUser.current],
+);
+
 
   async function checkLoginState() {
-    if (!CurrentAuthenticatedUser.current) {
-      CurrentAuthenticatedUser.current = await CheckCurrentUser();
-    }
+    currentUser.current = await CheckCurrentUser();
   }
-  currentState = checkLoginState();
+
+  counter +=1
+  checkLoginState();
+
+  console.log(counter);
 
   return <h1>Open Points</h1>;
 }
