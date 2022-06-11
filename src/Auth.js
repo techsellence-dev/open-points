@@ -6,19 +6,23 @@ import CheckCurrentUser from "./CheckCurrentUser";
 let counter = 0;
 
 function Auth() {
+  const executedRef=useRef(false);
 const currentUser = useRef(false)
 let navigate = useNavigate();
 
 useEffect(()=>{
+  if(executedRef.current){return};
   navigate("/Home", {replace : true})
-  console.log('inside use effect')
+  console.log('inside use effect auth')
+  currentUser.current = CheckCurrentUser();
+  executedRef.current=true
     },
-  [currentUser.current],
+  [],
 );
 
 
   async function checkLoginState() {
-    currentUser.current = await CheckCurrentUser();
+    
   }
 
   counter +=1

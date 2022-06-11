@@ -4,7 +4,9 @@ async function CheckCurrentUser() {
     fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
       console.log(response)
     );
-    return true;
+    return (new Promise(()=>{
+      
+    }));
   } catch (error) {
     console.log("no logged in user - inside catch block");
     return null;
